@@ -8,7 +8,7 @@ type TaskType = {
 }
 
 type PropsType = {
-    todolistId: string
+    todolistID: string
     title: string
     tasks: Array<TaskType>
     removeTask: (taskId: string) => void
