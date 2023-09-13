@@ -50,20 +50,21 @@ function App() {
         ]
     });
 
-    function removeTask(todolistID:string,taskId: string) {
+    function removeTask(todolistID: string, taskId: string) {
         // let filteredTasks = tasks.filter(t => t.id != id);
         // setTasks(filteredTasks);
-        setTasks({...tasks,[todolistID]:tasks[todolistID].filter(el=>el.id!==taskId)})
+        setTasks({...tasks, [todolistID]: tasks[todolistID].filter(el => el.id !== taskId)})
     }
 
-    function addTask(todolistID:string, title: string) {
+    function addTask(todolistID: string, title: string) {
         let newTask = {id: v1(), title: title, isDone: false};
-        setTasks({...tasks, [todolistID]:[...tasks[todolistID],newTask]})
+        setTasks({...tasks, [todolistID]: [...tasks[todolistID], newTask]})
         // let newTasks = [task, ...tasks];
         // setTasks(newTasks);
     }
 
-    function changeStatus(taskId: string, isDone: boolean) {
+    function changeStatus(todolistID: string, taskId: string, isDoneValue: boolean) {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone: isDoneValue} : el)})
         // let task = tasks.find(t => t.id === taskId);
         // if (task) {
         //     task.isDone = isDone;
@@ -84,10 +85,18 @@ function App() {
     //     tasksForTodolist = tasks.filter(t => t.isDone === true);
     // }
 
+
     function changeFilter(todolistID: string, value: FilterValuesType) {
         // setFilter(value);
         setTodolists(todolists.map(el => el.id === todolistID ? {...el, filter: value} : el))
+
     }
+
+    const removeTodolist = (todolistID: string) => {
+        setTodolists(todolists.filter(el => el.id !== todolistID))
+        delete tasks[todolistID]
+    }
+    console.log(tasks)
 
 
     return (
@@ -111,10 +120,12 @@ function App() {
                         addTask={addTask}
                         changeTaskStatus={changeStatus}
                         filter={el.filter}
+                        removeTodolist={removeTodolist}
                     />
                 )
             })}
         </div>
     );
 }
-    export default App;
+
+export default App;
