@@ -6,9 +6,10 @@ type PropsType = {
 }
 export const EditableSpan = (props: PropsType) => {
     const [edit, setEdit] = useState(false)
-    const [newTitle, setNewTitle] = useState(props.oldtitle)
+    const [newTitle, setNewTitle] = useState<string>(props.oldtitle)
 
     console.log(newTitle)
+
     const editHandler = () => {
         setEdit(!edit)
         if(edit) {
@@ -18,12 +19,12 @@ export const EditableSpan = (props: PropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
-
     }
+
     // const editHandler2 = () =>{
     //     setEdit(false)
     // }
-    const updateTitle =() => {
+    const updateTitle = () => {
        props.callback(newTitle)
     }
 

@@ -10,9 +10,7 @@ type TodoListsType = {
     title: string
     filter: FilterValuesType
 }
-type TasksStateType = {
-    [todoListID: string]: Array<TaskType>
-}
+
 function App() {
     // let [todolist, setTodolist] = useState<Array<TodoListsType>>([
     //     {id: v1(), title: "What to learn", filter: 'all'},
@@ -36,7 +34,7 @@ function App() {
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
-    let [tasks, setTasks] = useState<TasksStateType>({
+    let [tasks, setTasks] = useState({
         [todolistID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -67,7 +65,10 @@ function App() {
     }
 
     function changeStatus(todolistID: string, taskId: string, isDoneValue: boolean) {
-        setTasks({...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone: isDoneValue} : el)})
+        setTasks({
+            ...tasks,
+            [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone: isDoneValue} : el)
+        })
         // let task = tasks.find(t => t.id === taskId);
         // if (task) {
         //     task.isDone = isDone;
@@ -106,12 +107,15 @@ function App() {
         setTasks({...tasks, [todolistID]: []})
     }
 
-    const updateTask = (todolistId: string, taskId: string, newTitle: string) => {
-        setTasks({...tasks, [todolistId]:tasks[todolistId].map(el => el.id === taskId ? {...el,title:newTitle}:el)})
+    const updateTask = (todolistID: string, taskId: string, newTitle: string) => {
+        setTasks({
+            ...tasks,
+            [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, title: newTitle} : el)
+        })
     }
-        const updateTodolistTitle = (todolistId: string, title: string) => {
-            setTodolists(todolists.map(el =>el.id===todolistId ?  {...el,title}:el))
-        }
+    const updateTodolistTitle = (todolistId: string, title: string) => {
+        setTodolists(todolists.map(el => el.id === todolistId ? {...el, title} : el))
+    }
     return (
         <div className="App">
             <AddItemForm callback={addTodolist}/>
