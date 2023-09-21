@@ -3,7 +3,7 @@ import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
@@ -14,13 +14,13 @@ type PropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (todolistID: string, taskId: string) => void
-    changeFilter: (todolistId: string, value: FilterValuesType) => void
+    changeFilter: (todolistID: string, value: FilterValuesType) => void
     callback: (todolistID: string, title: string) => void
     changeTaskStatus: (todolistID: string, taskId: string, isDone: boolean) => void
     filter: FilterValuesType
     removeTodolist: (todolistID: string) => void
-    updateTask: (todolistId: string, taskId: string, newTitle: string) => void
-    updateTodolistTitle: (todolistId: string, newTitle: string, s: string) => void
+    updateTask: (todolistID: string, taskId: string, newTitle: string) => void
+    updateTodolistTitle: (todolistID: string, newTitle: string, s: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -48,14 +48,17 @@ export function Todolist(props: PropsType) {
     //     }
     // }
 
-    const onAllClickHandler = () => props.changeFilter(props.todolistID, "all");
-    const onActiveClickHandler = () => props.changeFilter(props.todolistID, "active");
-    const onCompletedClickHandler = () => props.changeFilter(props.todolistID, "completed");
+    // const onAllClickHandler = () => props.changeFilter(props.todolistID, "all");
+    // const onActiveClickHandler = () => props.changeFilter(props.todolistID, "active");
+    // const onCompletedClickHandler = () => props.changeFilter(props.todolistID, "completed");
+    const handlerCreator = (filter: FilterValuesType) => {
+        return () => props.changeFilter(props.todolistID,filter)
+    }
     const removeTodolistHandler = () => {
         props.removeTodolist(props.todolistID)
     }
     const addTaskHandler = (title: string) => {
-        props.callback(title, props.todolistID)
+        props.callback(props.todolistID,title)
 
     }
 
@@ -103,13 +106,13 @@ export function Todolist(props: PropsType) {
         </ul>
         <div>
             <button className={props.filter === 'all' ? "active-filter" : ""}
-                    onClick={onAllClickHandler}>All
+                    onClick={handlerCreator("all")}>All
             </button>
             <button className={props.filter === 'active' ? "active-filter" : ""}
-                    onClick={onActiveClickHandler}>Active
+                    onClick={handlerCreator("active")}>Active
             </button>
             <button className={props.filter === 'completed' ? "active-filter" : ""}
-                    onClick={onCompletedClickHandler}>Completed
+                    onClick={handlerCreator("completed")}>Completed
             </button>
         </div>
     </div>

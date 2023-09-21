@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from './Todolist';
+import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 
@@ -10,7 +10,9 @@ type TodoListsType = {
     title: string
     filter: FilterValuesType
 }
-
+type TasksStateType = {
+    [todoListID: string]: Array<TaskType>
+}
 function App() {
     // let [todolist, setTodolist] = useState<Array<TodoListsType>>([
     //     {id: v1(), title: "What to learn", filter: 'all'},
@@ -34,7 +36,7 @@ function App() {
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
-    let [tasks, setTasks] = useState({
+    let [tasks, setTasks] = useState<TasksStateType>({
         [todolistID1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -87,10 +89,9 @@ function App() {
     // }
 
 
-    function changeFilter(todolistID: string, value: FilterValuesType) {
+    const changeFilter = (todolistID: string, filter: FilterValuesType) => {
         // setFilter(value);
-        setTodolists(todolists.map(el => el.id === todolistID ? {...el, filter: value} : el))
-
+        setTodolists(todolists.map(el => el.id === todolistID ? {...el, filter: filter} : el))
     }
 
     const removeTodolist = (todolistID: string) => {
@@ -119,7 +120,7 @@ function App() {
                 if (el.filter === "active") {
                     tasksForTodolist = tasks[el.id].filter(t => t.isDone === false);
                 }
-                if (el.filter === "active") {
+                if (el.filter === "completed") {
                     tasksForTodolist = tasks[el.id].filter(t => t.isDone === true);
                 }
                 return (
@@ -130,7 +131,7 @@ function App() {
                         tasks={tasksForTodolist}
                         removeTask={removeTask}
                         changeFilter={changeFilter}
-                        callback={addTodolist}
+                        callback={addTask}
                         changeTaskStatus={changeStatus}
                         filter={el.filter}
                         removeTodolist={removeTodolist}
