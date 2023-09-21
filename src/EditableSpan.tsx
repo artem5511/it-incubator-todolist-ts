@@ -5,27 +5,27 @@ type PropsType = {
     callback: (newTitle:string) => void
 }
 export const EditableSpan = (props: PropsType) => {
-    const [edit, setEdit] = useState(false)
-    const [newTitle, setNewTitle] = useState(props.oldtitle)
-
+    const [edit, setEdit] = useState<boolean>(false)
+    const [newTitle, setNewTitle] = useState<string>(props.oldtitle)
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewTitle(e.currentTarget.value)
+    }
     console.log(newTitle)
+
     const editHandler = () => {
         setEdit(!edit)
         if(edit) {
-            updateTitle()
+            props.callback(newTitle)
         }
     }
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTitle(e.currentTarget.value)
 
-    }
     // const editHandler2 = () =>{
     //     setEdit(false)
     // }
-    const updateTitle =() => {
-       props.callback(newTitle)
-    }
+    // const updateTitle =() => {
+    //    props.callback(newTitle)
+    // }
 
     return (
         edit
