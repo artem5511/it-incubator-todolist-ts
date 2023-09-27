@@ -5,8 +5,7 @@ import {EditableSpan} from './EditableSpan';
 import IconButton from '@material-ui/core/IconButton';
 import {Delete} from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
-import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { green, purple } from '@material-ui/core/colors';
+import Checkbox from '@material-ui/core/Checkbox';
 
 export type TaskType = {
     id: string
@@ -77,10 +76,20 @@ export function Todolist(props: PropsType) {
                         props.updateTask(props.todolistID, t.id, newTitle)
                     }
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <input type="checkbox"
-                               onChange={onChangeHandler}
-                               checked={t.isDone}/>
+                        {/*<input type="checkbox"*/}
+                        {/*       onChange={onChangeHandler}*/}
+                        {/*       checked={t.isDone}/>*/}
                         {/*<span>{t.title}</span>*/}
+                        <Checkbox
+                            checked={t.isDone}
+                            onChange={onChangeHandler}
+                            defaultChecked
+                            color="primary"
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        />
+
+
+
                         <EditableSpan oldtitle={t.title} callback={updateTaskHandler}/>
                         {/*<button onClick={onClickHandler}>x</button>*/}
                         <IconButton aria-label="delete" onClick={onClickHandler}>
