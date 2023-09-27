@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
- import {Button} from '@material-ui/core';
+import Button from '@mui/material/Button';
+
 //если автоматом, то тянет всю библиотеку и тормозить будет
 // import Button from '@mui/material/Button';
 //лучше так
@@ -30,6 +31,13 @@ export const AddItemForm = (props: PropsType) => {
             addTask();
         }
     }
+    const buttonStyle = {
+        maxWidth: '30px',
+        maxHeight: '20px',
+        minWidth: '15px',
+        minHeight: '15px',
+        backgroundColor: 'purple'
+    }
 
     return (
         <div>
@@ -39,9 +47,9 @@ export const AddItemForm = (props: PropsType) => {
                    className={error ? "error" : ""}
             />
             {/*<button onClick={addTask}>+</button>*/}
-            <Button variant="contained">+</Button>
+            <Button size='small' variant="contained" onClick={addTask} style={buttonStyle}>+</Button>
 
             {error && <div className="error-message">{error}</div>}
         </div>
-    );
+    )
 };
