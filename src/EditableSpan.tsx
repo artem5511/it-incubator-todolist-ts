@@ -18,14 +18,12 @@ export const EditableSpan = (props: PropsType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
     }
-
     // const editHandler2 = () =>{
     //     setEdit(false)
     // }
     const updateTitle = () => {
        props.callback(newTitle)
     }
-
     return (
         edit
             ? <input value={newTitle} onBlur={editHandler} onChange={onChangeHandler} autoFocus/>
