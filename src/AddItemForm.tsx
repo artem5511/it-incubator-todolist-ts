@@ -1,4 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+ import {Button} from '@material-ui/core';
+//если автоматом, то тянет всю библиотеку и тормозить будет
+// import Button from '@mui/material/Button';
+//лучше так
 
 type PropsType = {
     callback: (title: string) => void
@@ -34,7 +38,9 @@ export const AddItemForm = (props: PropsType) => {
                    onKeyPress={onKeyPressHandler}
                    className={error ? "error" : ""}
             />
-            <button onClick={addTask}>+</button>
+            {/*<button onClick={addTask}>+</button>*/}
+            <Button variant="contained">+</Button>
+
             {error && <div className="error-message">{error}</div>}
         </div>
     );
