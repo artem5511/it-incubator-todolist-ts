@@ -37,7 +37,7 @@ export const AddItemForm = (props: PropsType) => {
         maxWidth: '30px',
         maxHeight: '30',
         minWidth: '30px',
-       minHeight: '30px',
+        minHeight: '30px',
         backgroundColor: 'purple'
     }
 
@@ -49,18 +49,20 @@ export const AddItemForm = (props: PropsType) => {
             {/*       className={error ? "error" : ""}*/}
             {/*/>*/}
             <TextField
+                size='small'
+                error={!!error}
                 value={title}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
                 className={error ? "error" : ""}
                 id="outlined-basic"
-                label="Outlined"
+                label={error ? error : "Type smth..."}
                 variant="outlined" />
-        {/*<button onClick={addTask}>+</button>*/<Button size='small' variant="contained" color="primary" style={buttonStyle} onClick={addTask}>
+        {/*<button onClick={addTask}>+</button>*/}
+            <Button size='small' variant="contained" color="primary" style={buttonStyle} onClick={addTask}>
               +
             </Button>
-
-            {error && <div className="error-message">{error}</div>}
+            {/*{error && <div className="error-message">{error}</div>}*/}
         </div>
     )
 };
