@@ -17,7 +17,6 @@ type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-
 function App() {
     function removeTask(id: string, todolistId: string) {
         //достанем нужный массив по todolistId:
@@ -162,8 +161,6 @@ function App() {
                         })
                     }
                 </Grid>
-
-
             </Container>
 
         </div>
