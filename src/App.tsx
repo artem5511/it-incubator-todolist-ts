@@ -123,10 +123,9 @@ function App() {
         <div className="App">
             <ButtonAppBar/>
             <Container>
-                <Grid container style={{padding:'20px'}}>
+                <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
-
                 <Grid container spacing={3}>
                     {
                         todolists.map(tl => {
@@ -141,7 +140,7 @@ function App() {
                             }
 
                             return <Grid item>
-                                <Paper elevation={5} style={{padding:'20px'}}>
+                                <Paper elevation={5} style={{padding: '20px'}}>
                                     <Todolist
                                         key={tl.id}
                                         id={tl.id}
@@ -153,8 +152,7 @@ function App() {
                                         changeTaskStatus={changeStatus}
                                         filter={tl.filter}
                                         removeTodolist={removeTodolist}
-                                        changeTaskTitle={changeTaskTitle}
-                                        changeTodolistTitle={changeTodolistTitle}
+                                        changeTaskTitle={changeTaskTitle} changeTodolistTitle={changeTodolistTitle}
                                     />
                                 </Paper>
                             </Grid>
