@@ -1,22 +1,56 @@
 import {TodolistType} from '../App';
+import {v1} from 'uuid';
+import {Simulate} from 'react-dom/test-utils';
+import change = Simulate.change;
 
-export const todolistsReducer= (state: Array<TodolistType>, action: { id: string; type: string }):TodolistType[] => {
+export const todolistsReducer = (state: Array<TodolistType>, action: TodolistsReducerType): TodolistType[] => {
     switch (action.type) {
         case 'REMOVE-TODOLIST': {
-            return state
+            return state.filter(el => el.id !== action.payload.id)
         }
-        default:return state
+        case 'ADD-TODOLIST' : {
+            let newTodolistId = v1();
+            let newTodolist: TodolistType = {id: newTodolistId, title: action.payload.title, filter: 'all'};
+            return [...state, newTodolist]
+        }
+        case 'CHANGE-TODOLIST-TITLE' : {
+            // let newTodolist: TodolistType = {id: newTodolistId, title: action.payload.title, filter: 'all'};
+            return state.map(el => el.id===action.payload.id ? {...el,title:action.payload.title}:el)
+        }
+        default:
+            return state
     }
 }
 
-type TodolistsReducerType=RemoveTodolistACType
-type RemoveTodolistACType=ReturnType<typeof removeTodoListsAC>
-export const removeTodoListsAC=(id: string) => {
+type TodolistsReducerType = RemoveTodolistACType | AddTodoListACType | changeTodolistTitleACType
+type RemoveTodolistACType = ReturnType<typeof removeTodoListsAC>
+export const removeTodoListsAC = (id: string) => {
     return {
         type: 'REMOVE-TODOLIST',
         payload: {
             id
         }
 
+    } as const
+}
+
+type AddTodoListACType = ReturnType<typeof addTodolistAC>
+export const addTodolistAC = (title: string) => {
+    return {
+        type: 'ADD-TODOLIST',
+        payload: {
+            title
+        }
+
+    } as const
+}
+
+type  changeTodolistTitleACType=ReturnType<typeof changeTodolistTitleAC>
+export const changeTodolistTitleAC=(id: string, title: string)=> {
+    return {
+        type: 'CHANGE-TODOLIST-TITLE',
+        payload: {
+            id, title
+        }
     }as const
 }
