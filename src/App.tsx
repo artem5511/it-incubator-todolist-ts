@@ -107,8 +107,7 @@ function App() {
             {id: v1(), title: "Milk", isDone: true},
             {id: v1(), title: "React Book", isDone: true}
         ]
-    });
-
+    })
     function addTodolist(title: string) {
         let newTodolistId = v1();
         let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'};
@@ -160,7 +159,6 @@ function App() {
                     }
                 </Grid>
             </Container>
-
         </div>
     );
 }

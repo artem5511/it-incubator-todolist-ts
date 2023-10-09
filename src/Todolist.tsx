@@ -40,7 +40,6 @@ export function Todolist(props: PropsType) {
         props.changeTodolistTitle(props.id, title);
     }
 
-
     const onAllClickHandler = () => props.changeFilter("all", props.id);
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
@@ -69,7 +68,6 @@ export function Todolist(props: PropsType) {
                         props.changeTaskTitle(t.id, newValue, props.id);
                     }
 
-
                     return <li key={t.id} className={t.isDone ? "is-done" : ""}>
                         {/*<input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>*/}
                         {/*<Checkbox  defaultChecked onChange={onChangeHandler} checked={t.isDone} />*/}
@@ -87,7 +85,6 @@ export function Todolist(props: PropsType) {
             <Button variant={props.filter === 'all' ? "outlined": "contained"} color="success" onClick={onAllClickHandler}>All</Button>
             <Button variant={props.filter === 'active' ? "outlined": "contained"} color="error"   onClick={onActiveClickHandler}>Active</Button>
             <Button variant={props.filter === 'completed' ? "outlined": "contained"} color="secondary"  onClick={onCompletedClickHandler}>Completed</Button>
-
             {/*<button className={props.filter === 'all' ? "active-filter" : ""}*/}
             {/*        onClick={onAllClickHandler}>All*/}
             {/*</button>*/}
