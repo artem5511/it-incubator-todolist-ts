@@ -2,13 +2,18 @@ import {FilterValuesType, TasksStateType, TodolistType} from '../App';
 import {v1} from 'uuid';
 import {Simulate} from 'react-dom/test-utils';
 import change = Simulate.change;
+import {AddTodoListACType} from './todolists-reducer';
 
 export type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 export type AddTaskActionType = ReturnType<typeof addTaskAC>
 export type ChangeTaskStatusActionType = ReturnType<typeof changeTaskStatusAC>
 export type ChangeTaskTitleActionType = ReturnType<typeof changeTaskTitleAC>
 
-type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusActionType | ChangeTaskTitleActionType
+type ActionsType = RemoveTaskActionType
+    | AddTaskActionType
+    | ChangeTaskStatusActionType
+    | ChangeTaskTitleActionType
+    | AddTodoListACType
 
 export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
     switch (action.type) {
@@ -33,6 +38,11 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
                 ...state,
                 [action.todolistsId]:state[action.todolistsId]
                     .map(t=> t.id === action.tasksId ? {...t, title: action.title}: t)
+            }
+        case 'ADD-TODOLIST':
+            return {
+                ...state,
+                [action.todolistId]:[]
             }
         default:
             throw new Error("I don't understand this type")
