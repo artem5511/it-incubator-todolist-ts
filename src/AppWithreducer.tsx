@@ -5,7 +5,13 @@ import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 import ButtonAppBar from "./ButtonAppBar";
 import {Container, Grid, Paper} from "@mui/material";
-import {changeFilterAC, changeTodolistTitleAC, removeTodoListsAC, todolistsReducer} from './state/todolists-reducer';
+import {
+    addTodolistAC,
+    changeFilterAC,
+    changeTodolistTitleAC,
+    removeTodoListsAC,
+    todolistsReducer
+} from './state/todolists-reducer';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -48,6 +54,10 @@ function AppWithReducer() {
         dispatchToTodolists(changeTodolistTitleAC(id, title))
     }
 
+    function addTodolist(title: string) {
+        dispatchToTodolists(addTodolistAC(title))
+    }
+
     let todolistId1 = v1();
     let todolistId2 = v1();
 
@@ -66,15 +76,6 @@ function AppWithReducer() {
             {id: v1(), title: "React Book", isDone: true}
         ]
     })
-    function addTodolist(title: string) {
-        let newTodolistId = v1();
-        let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'};
-        dispatchToTodolists([newTodolist, ...todolists]);
-        dispatchToTasks({
-            ...tasks,
-            [newTodolistId]: []
-        })
-    }
 
     return (
         <div className="App">
