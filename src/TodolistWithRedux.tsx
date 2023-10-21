@@ -44,6 +44,12 @@ export function TodolistWithRedux({todolist}: PropsType) {
     const onActiveClickHandler = () => dispatch(changeFilterAC(id, 'active'));
     const onCompletedClickHandler = () => dispatch(changeFilterAC(id, 'completed'));
 
+    if (filter === "active") {
+        tasks = tasks.filter(t => t.isDone === false);
+    }
+    if (filter === "completed") {
+        tasks = tasks.filter(t => t.isDone === true);
+    }
     const changeStatusHandler=(tID: string, checked: boolean)=>{
        dispatch(changeTaskStatusAC(tID, checked, id));
     }

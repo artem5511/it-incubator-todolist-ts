@@ -109,6 +109,7 @@ function AppWithRedux() {
                                 <Paper elevation={5} style={{padding: '20px'}}>
                                     <TodolistWithRedux
                                         todolist={tl}
+                                        />
                                 </Paper>
                             </Grid>
                         })
