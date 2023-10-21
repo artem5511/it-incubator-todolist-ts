@@ -1,9 +1,10 @@
-import {FilterValuesType, TodolistType} from '../App';
+import {FilterValuesType, TasksStateType, TodolistType} from '../App';
 import {v1} from 'uuid';
 import {Simulate} from 'react-dom/test-utils';
 import change = Simulate.change;
 
-export const todolistsReducer = (state: Array<TodolistType>, action: TodolistsReducerType): TodolistType[] => {
+const initialState: Array<TodolistType> = []
+export const todolistsReducer = (state: TodolistType[] = initialState, action: TodolistsReducerType): TodolistType[] => {
     switch (action.type) {
         case 'REMOVE-TODOLIST': {
             return state.filter(el => el.id !== action.payload.id)
