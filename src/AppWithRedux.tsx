@@ -15,6 +15,7 @@ import {
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
 import {AppRootStateType} from './state/store';
 import {useDispatch, useSelector} from 'react-redux';
+import {TodolistWithRedux} from './TodolistWithRedux';
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -69,17 +70,19 @@ function AppWithRedux() {
     //     {id: todolistId1, title: "What to learn", filter: "all"},
     //     {id: todolistId2, title: "What to buy", filter: "all"}
     // ])
-    let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-    // let [tasks, dispatchToTasks] = useReducer(tasksReducer, {
-    //     [todolistId1]: [
-    //         {id: v1(), title: "HTML&CSS", isDone: true},
-    //         {id: v1(), title: "JS", isDone: true}
-    //     ],
-    //     [todolistId2]: [
-    //         {id: v1(), title: "Milk", isDone: true},
-    //         {id: v1(), title: "React Book", isDone: true}
-    //     ]
-    // })
+
+    // let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+
+    // // let [tasks, dispatchToTasks] = useReducer(tasksReducer, {
+    // //     [todolistId1]: [
+    // //         {id: v1(), title: "HTML&CSS", isDone: true},
+    // //         {id: v1(), title: "JS", isDone: true}
+    // //     ],
+    // //     [todolistId2]: [
+    // //         {id: v1(), title: "Milk", isDone: true},
+    // //         {id: v1(), title: "React Book", isDone: true}
+    // //     ]
+    // // })
     const dispatch = useDispatch()
 
     return (
@@ -92,31 +95,20 @@ function AppWithRedux() {
                 <Grid container spacing={3}>
                     {
                         todolists.map(tl => {
-                            let allTodolistTasks = tasks[tl.id];
-                            let tasksForTodolist = allTodolistTasks;
+                            // let allTodolistTasks = tasks[tl.id];
+                            // let tasksForTodolist = allTodolistTasks;
+                            //
+                            // if (tl.filter === "active") {
+                            //     tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
+                            // }
+                            // if (tl.filter === "completed") {
+                            //     tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
+                            // }
 
-                            if (tl.filter === "active") {
-                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
-                            }
-                            if (tl.filter === "completed") {
-                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
-                            }
-
-                            return <Grid item>
+                            return <Grid key={tl.id} item>
                                 <Paper elevation={5} style={{padding: '20px'}}>
-                                    <Todolist
-                                        key={tl.id}
-                                        id={tl.id}
-                                        title={tl.title}
-                                        tasks={tasksForTodolist}
-                                        removeTask={removeTask}
-                                        changeFilter={changeFilter}
-                                        addTask={addTask}
-                                        changeTaskStatus={changeStatus}
-                                        filter={tl.filter}
-                                        removeTodolist={removeTodolist}
-                                        changeTaskTitle={changeTaskTitle} changeTodolistTitle={changeTodolistTitle}
-                                    />
+                                    <TodolistWithRedux
+                                        todolist={tl}
                                 </Paper>
                             </Grid>
                         })
