@@ -9,7 +9,7 @@ export const todolistsReducer = (state: Array<TodolistType>, action: TodolistsRe
             return state.filter(el => el.id !== action.payload.id)
         }
         case 'ADD-TODOLIST' : {
-            let newTodolistId = v1();
+            // let newTodolistId = v1();
             let newTodolist: TodolistType = {id: action.todolistId, title: action.title, filter: 'all'};
             return [...state, newTodolist]
         }
