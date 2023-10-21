@@ -33,7 +33,6 @@ export const removeTodoListsAC = (id: string) => {
         payload: {
             id
         }
-
     } as const
 }
 
