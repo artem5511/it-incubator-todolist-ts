@@ -6,7 +6,7 @@ import {AddItemForm} from './AddItemForm';
 import ButtonAppBar from "./ButtonAppBar";
 import {Container, Grid, Paper} from "@mui/material";
 import {todolistsReducer} from './state/todolists-reducer';
-import {removeTaskAC, tasksReducer} from './state/tasks-reducer';
+import {addTaskAC, changeTaskStatusAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistType = {
@@ -25,7 +25,7 @@ function AppWithReducer() {
     }
 
     function addTask(title: string, todolistId: string) {
-        dispatchToTasks(removeTaskAC(title, todolistId))
+        dispatchToTasks(addTaskAC(title, todolistId))
     }
 
     function changeFilter(value: FilterValuesType, todolistId: string) {
@@ -37,7 +37,7 @@ function AppWithReducer() {
     }
 
     function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        dispatchToTasks(removeTaskAC(id,isDone, todolistId))
+        dispatchToTasks(changeTaskStatusAC(id,isDone, todolistId))
     }
 
     function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
