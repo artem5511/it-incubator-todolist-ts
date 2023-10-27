@@ -7,6 +7,7 @@ type AddItemFormPropsType = {
 }
 
 export function AddItemForm(props: AddItemFormPropsType) {
+    console.log('AddItemForm')
 
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
@@ -23,7 +24,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
         setTitle(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        if (error) setError(null);
         if (e.charCode === 13) {
             addItem();
         }
