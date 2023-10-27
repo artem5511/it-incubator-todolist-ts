@@ -65,7 +65,7 @@ function AppWithRedux() {
     let todolistId1 = v1();
     let todolistId2 = v1();
 
-    let todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
+    let todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists, () => true)
     // let [todolists, dispatchToTodolists] = useReducer(todolistsReducer, [
     //     {id: todolistId1, title: "What to learn", filter: "all"},
     //     {id: todolistId2, title: "What to buy", filter: "all"}
