@@ -29,34 +29,34 @@ export type TasksStateType = {
 }
 
 function AppWithRedux() {
-    function removeTask(id: string, todolistId: string) {
-        dispatch(removeTaskAC(id, todolistId))
-    }
-
-    function addTask(title: string, todolistId: string) {
-        dispatch(addTaskAC(title, todolistId))
-    }
-
-    function changeFilter(value: FilterValuesType, todolistId: string) {
-        dispatch(changeFilterAC(todolistId, value))
-    }
-
-    function changeStatus(id: string, isDone: boolean, todolistId: string) {
-        dispatch(changeTaskStatusAC(id, isDone, todolistId))
-    }
-
-    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
-        dispatch(changeTaskTitleAC(id, newTitle, todolistId))
-    }
-
-    function removeTodolist(id: string) {
-        dispatch(removeTodoListsAC(id))
-        // dispatchToTasks(action)
-    }
-
-    function changeTodolistTitle(id: string, title: string) {
-        dispatch(changeTodolistTitleAC(id, title))
-    }
+    // function removeTask(id: string, todolistId: string) {
+    //     dispatch(removeTaskAC(id, todolistId))
+    // }
+    //
+    // function addTask(title: string, todolistId: string) {
+    //     dispatch(addTaskAC(title, todolistId))
+    // }
+    //
+    // function changeFilter(value: FilterValuesType, todolistId: string) {
+    //     dispatch(changeFilterAC(todolistId, value))
+    // }
+    //
+    // function changeStatus(id: string, isDone: boolean, todolistId: string) {
+    //     dispatch(changeTaskStatusAC(id, isDone, todolistId))
+    // }
+    //
+    // function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
+    //     dispatch(changeTaskTitleAC(id, newTitle, todolistId))
+    // }
+    //
+    // function removeTodolist(id: string) {
+    //     dispatch(removeTodoListsAC(id))
+    //     // dispatchToTasks(action)
+    // }
+    //
+    // function changeTodolistTitle(id: string, title: string) {
+    //     dispatch(changeTodolistTitleAC(id, title))
+    // }
 
     function addTodolist(title: string) {
         dispatch(addTodolistAC(title))
