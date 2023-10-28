@@ -30,34 +30,34 @@ export type TasksStateType = {
 
 function AppWithRedux() {
     const dispatch = useDispatch();
-    const removeTask = useCallback((id: string, todolistId: string) => {
+    function removeTask(id: string, todolistId: string) {
         dispatch(removeTaskAC(id, todolistId))
-    },[dispatch]);
+    }
 
     const addTask = useCallback((title: string, todolistId: string) => {
         dispatch(addTaskAC(title, todolistId))
     }, [dispatch]);
 
-    const changeFilter = useCallback((value: FilterValuesType, todolistId: string) => {
+    function changeFilter(value: FilterValuesType, todolistId: string) {
         dispatch(changeFilterAC(todolistId, value))
-    }, [dispatch]);
+    }
 
-    const changeStatus = useCallback((id: string, isDone: boolean, todolistId: string) => {
+    function changeStatus(id: string, isDone: boolean, todolistId: string) {
         dispatch(changeTaskStatusAC(id, isDone, todolistId))
-    }, [dispatch]);
+    }
 
-    const changeTaskTitle = useCallback((id: string, newTitle: string, todolistId: string) => {
+    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
         dispatch(changeTaskTitleAC(id, newTitle, todolistId))
-    }, [dispatch]);
+    }
 
-    const removeTodolist = useCallback((id: string) => {
+    function removeTodolist(id: string) {
         dispatch(removeTodoListsAC(id))
         // dispatchToTasks(action)
-    }, [dispatch]);
+    }
 
-    const changeTodolistTitle = useCallback((id: string, title: string) => {
+    function changeTodolistTitle(id: string, title: string) {
         dispatch(changeTodolistTitleAC(id, title))
-    }, [dispatch]);
+    }
 
     const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistAC(title));
@@ -84,6 +84,7 @@ function AppWithRedux() {
     // //         {id: v1(), title: "React Book", isDone: true}
     // //     ]
     // // })
+    // const dispatch = useDispatch();
     return (
         <div className="App">
             <ButtonAppBar/>
