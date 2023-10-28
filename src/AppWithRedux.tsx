@@ -29,6 +29,7 @@ export type TasksStateType = {
 }
 
 function AppWithRedux() {
+    const dispatch = useDispatch();
     function removeTask(id: string, todolistId: string) {
         dispatch(removeTaskAC(id, todolistId))
     }
@@ -83,7 +84,6 @@ function AppWithRedux() {
     // //         {id: v1(), title: "React Book", isDone: true}
     // //     ]
     // // })
-    const dispatch = useDispatch();
     return (
         <div className="App">
             <ButtonAppBar/>
