@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
@@ -13,7 +13,6 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
-
 type PropsType = {
     id: string
     title: string
@@ -27,8 +26,7 @@ type PropsType = {
     filter: FilterValuesType
     changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
 }
-
-export function Todolist(props: PropsType) {
+export const Todolist = memo ((props: PropsType)=> {
     const addTask =useCallback( (title: string) => {
         props.addTask(title, props.id);
     }, [props.addTask, props.id]);
@@ -96,6 +94,6 @@ export function Todolist(props: PropsType) {
             {/*</button>*/}
         </div>
     </div>
-}
+})
 
 
